@@ -8,6 +8,7 @@ services:
       - "8080:80"
     volumes:
       - ./webroot:/var/www/html
+      - ./:/var/www
     restart: always
     depends_on:
       - mysql
