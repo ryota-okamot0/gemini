@@ -13,3 +13,4 @@ define('SYMBOL_QUESTION', '?');
 // ディレクトリ
 // ==================================================
 define('DIR_CONTROLLERS', 'app/Controllers');
+define('DIR_MODELS', 'app/Models');

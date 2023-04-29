@@ -2,9 +2,12 @@
 // http://localhost:8080/
 // https://uidev.jp/entry-71.html
 // https://www.blog.danishi.net/2019/05/29/post-1292/
+// https://qiita.com/kahirokunn/items/175b82295ab683ffb624
 require_once '../config/constants.php';
 
-echo 'Hello Gemini!';
+if (empty($_SERVER['REQUEST_URI'])) {
+    exit;
+}
 
 // URLを取得
 $arrayParseUri = explode(SYMBOL_SLASH, $_SERVER['REQUEST_URI']);
@@ -17,12 +20,12 @@ if ($call === "") {
 }
 
 // URLと同名のControllerクラスを探しに行く
-if (file_exists('../'. DIR_CONTROLLERS. $call. 'class.php')) {
+if (file_exists('../'. DIR_CONTROLLERS. SYMBOL_SLASH. $call. 'Controller.class.php')) {
     // 見つかったファイルをインクルードしてコントローラーをインスタンス化
-    include('../'. DIR_CONTROLLERS. $call. 'class.php');
-    $class = DIR_CONTROLLERS . $call;
+    include('../'. DIR_CONTROLLERS. SYMBOL_SLASH. $call. 'Controller.class.php');
+    $class = 'app\Controllers\\'. $call. 'Controller';
     $obj   = new $class();
-    
+
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
         // GETならindexメソッドを呼び出す
         $response = $obj->index();

@@ -1,9 +1,11 @@
 <?php
 
-namespace app\Controller;
+namespace app\Controllers;
 
-require_once dirname ( __FILE__ ) . '/../../vendor/autoload.php';
-require_once dirname ( __FILE__ ) . '/../utility/utility.php';
+require_once '../config/constants.php';
+// require_once dirname ( __FILE__ ) . '/../../vendor/autoload.php';
+// require_once dirname ( __FILE__ ) . '/../utility/utility.php';
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Smarty;
