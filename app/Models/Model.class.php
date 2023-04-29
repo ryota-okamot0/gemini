@@ -17,7 +17,9 @@ use app\utility\utility;
  */
 class Model
 {
-    private $name   = 'model';
+    /**
+     * 
+     */
     public $pdo;
 
     /**
@@ -34,27 +36,9 @@ class Model
         // PDOを使いDBMSに接続
         try {
             $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8;', DB_HOST, DB_NAME);
-            // $dsn = DB_TYPE. ':dbname='. DB_NAME. ';host='. DB_HOST;
-            // var_dump($dsn);exit;
             $user = DB_USER;
             $password = DB_PASS;
             $this->pdo = new PDO($dsn, $user, $password);
-            // switch(strtoupper($dbms)){ // パラメータでDBMSごとに接続を切り替え
-            //     case 'MYSQL':
-            //         $dsn       = 'mysql:dbname=' . Utility::getIniValue('MYSQL', 'DB_NAME') 
-            //                    . ';host=' . Utility::getIniValue('MYSQL', 'HOST_NAME');
-            //         $user      = Utility::getIniValue('MYSQL', 'USER');
-            //         $password  = Utility::getIniValue('MYSQL', 'PASSWORD');
-            //         $this->pdo = new PDO($dsn, $user, $password);
-            //         break;
-
-            //     case 'SQLITE':
-            //         $db_file   = 'sample.db';
-            //         $db_path   = __DIR__ . '/sqlite/' . $db_file;
-            //         $this->pdo = new PDO('sqlite:' . $db_path);
-            //         break;
-            // }
-            
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (Exception $e) {

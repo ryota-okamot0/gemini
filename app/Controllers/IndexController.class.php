@@ -39,7 +39,8 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $user = new User();
+        $user_tbl = new User();
+        $user = $user_tbl->getAll();
         var_dump($user);exit;
         // テンプレートにパラメータを渡し、HTMLを生成し返却
         return $this->view($this->name, [
