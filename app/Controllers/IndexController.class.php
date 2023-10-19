@@ -26,6 +26,7 @@ class IndexController extends Controller
      */
     public function __construct()
     {
+        $this->name = 'index';
     }
 
     /**
@@ -39,14 +40,14 @@ class IndexController extends Controller
      */
     public function index()
     {
+        // Model Userのインスタンス生成
         $userTbl = new User();
-        $user = $userTbl->getAll();
-        var_dump($user);exit;
-        // テンプレートにパラメータを渡し、HTMLを生成し返却
+
+        // テンプレートにパラメータを渡してHTMLを生成して返す
         return $this->view($this->name, [
             'title'     => $this->name,
             'message'   => 'Hello',
-            'list'      => $mytable->getAll()
+            'list'      => $userTbl->getAll()
         ]);
     }
 
