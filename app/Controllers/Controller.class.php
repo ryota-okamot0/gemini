@@ -7,12 +7,12 @@ require_once dirname ( __FILE__ ) . '/../../vendor/smarty/smarty/libs/Smarty.cla
 // require_once("Smarty/libs/Smarty.class.php");
 // require_once('/var/www/app/Smarty/libs/Smarty.class.php');
 require_once dirname ( __FILE__ ) . '/../../vendor/autoload.php';
-// require_once dirname ( __FILE__ ) . '/../utility/utility.php';
+require_once dirname ( __FILE__ ) . '/../Utils/Util.class.php';
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Smarty;
-use app\utility\utility;
+use app\Utils\Util;
 
 /**
  * コントローラ基底クラス
@@ -22,7 +22,7 @@ use app\utility\utility;
  */
 class Controller
 {
-    protected $name   = 'controller';
+    private $name = "Controller";
     protected function __construct(){
         // コントローラーを直接呼ばれてもnewできないように
     }
@@ -38,9 +38,9 @@ class Controller
         $Smarty->template_dir = __DIR__ . '/../Views/';
         $Smarty->compile_dir  = __DIR__ . '/../Views/Views_c/';
         $Smarty->escape_html  = true;
-        // $Smarty->assign([
-        //     'cssUnCache'    => Utility::cssUnCache()
-        // ]);
+        $Smarty->assign([
+            'cssUnCache'    => Util::cssUnCache()
+        ]);
         $Smarty->assign($param);
         return $Smarty->fetch($template . '.tpl');
     }

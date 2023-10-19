@@ -2,10 +2,10 @@
 <html lang="ja">
 <head>
 {* headタグの中身を出力 *}
-{* include file='template/head_tag.tpl' *}
+{include file='template/head_tag.tpl'}
 </head>
 {* ヘッダーを出力 *}
-{* include file='template/header.tpl' title=$title *}
+{include file='template/header.tpl' title=$title}
 <body class="d-flex flex-column h-100">
     <main role="main" class="flex-shrink-0">
         <div class="container">
@@ -40,7 +40,7 @@
     </main>
 </body>
 {* フッターを出力 *}
-{* include file='template/footer.tpl' copyright='danishi' *}
+{include file='template/footer.tpl' copyright='danishi'}
 {* scriptタグを出力 *}
-{* include file='template/foot_tag.tpl' *}
+{include file='template/foot_tag.tpl'}
 </html>
