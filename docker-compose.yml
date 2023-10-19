@@ -1,5 +1,4 @@
 version: "2"
-# service
 services:
   # web
   web:
@@ -11,8 +10,8 @@ services:
       - ./:/var/www
     restart: always
     depends_on:
-      - mysql
-  # db
+      - db
+  # mysql (formerly db)
   db:
     image: mysql:5.7
     platform: linux/x86_64
@@ -21,8 +20,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-    - ./config/mysql/data:/var/lib/mysql
-    - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./config/mysql/data:/var/lib/mysql
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: root
     command: --innodb-use-native-aio=0
