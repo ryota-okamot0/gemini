@@ -35,7 +35,8 @@
         </form>
         <form class="form-inline" method="post">
             <label> Name </label><input type="text" name="name" class="form-control" placeholder="input new name">
-            <button name="add" type="submit" class="btn btn-info">register</button>
+            <label> Age </label><input type="text" name="age" class="form-control" placeholder="input new name">
+            <button name="register" type="submit" class="btn btn-info" value="register">register</button>
         </form>
     </main>
 </body>

@@ -3,16 +3,12 @@
 namespace app\Controllers;
 
 require_once '../config/constants.php';
-require_once dirname ( __FILE__ ) . '/../../vendor/smarty/smarty/libs/Smarty.class.php';
-// require_once("Smarty/libs/Smarty.class.php");
-// require_once('/var/www/app/Smarty/libs/Smarty.class.php');
-require_once dirname ( __FILE__ ) . '/../../vendor/autoload.php';
-require_once dirname ( __FILE__ ) . '/../Utils/Util.class.php';
+require_once DIR_VENDOR. 'smarty/smarty/libs/Smarty.class.php';
+require_once DIR_VENDOR. 'autoload.php';
+require_once '../'. DIR_UTILS. 'Util.class.php';
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Smarty;
 use app\Utils\Util;
+use Smarty;
 
 /**
  * コントローラ基底クラス
@@ -22,26 +18,50 @@ use app\Utils\Util;
  */
 class Controller
 {
-    private $name = "Controller";
-    protected function __construct(){
-        // コントローラーを直接呼ばれてもnewできないように
+    protected $name = "";
+
+    /**
+     * コンストラクタ
+     * __construct
+     *
+     * コントローラーを直接呼ばれてもnewできないようにコンストラクタを明示的に記述
+     *
+     * @param なし
+     * @return なし
+     */
+    protected function __construct()
+    {
     }
-    // ログの出力
-    public function logging($message, string $file_name = 'app.log'){
-        $Logger = new Logger('logger');
-        $Logger->pushHandler(new StreamHandler(__DIR__ . '/../../logs/' . $file_name, Logger::INFO));
-        $Logger->addInfo($message);
-    }
-    // ビューの生成
-    public function view(string $template, array $param): string{
-        $Smarty = new Smarty();
-        $Smarty->template_dir = __DIR__ . '/../Views/';
-        $Smarty->compile_dir  = __DIR__ . '/../Views/Views_c/';
-        $Smarty->escape_html  = true;
-        $Smarty->assign([
+
+
+
+    /**
+     * view画面生成
+     * view
+     *
+     * viewの画面を生成する
+     *
+     * @param string $tplName
+     *    テンプレートファイル名
+     * @param array $params
+     *    リクエストパラメータ
+     * @return string
+     *    テンプレート処理結果内容
+     */
+    public function view(string $tplName, array $params): string
+    {
+        // Smartyクラスインスタンス生成
+        $smarty = new Smarty();
+        // テンプレート格納フォルダをセット
+        $smarty->template_dir = '../'. DIR_VIEWS;
+        // Smartyコンパイルフォルダをセット
+        $smarty->compile_dir  = '../'. DIR_VIEWS_C;
+        $smarty->escape_html  = true;
+        $smarty->assign([
             'cssUnCache'    => Util::cssUnCache()
         ]);
-        $Smarty->assign($param);
-        return $Smarty->fetch($template . '.tpl');
+        $smarty->assign($params);
+
+        return $smarty->fetch($tplName . '.tpl');
     }
 }

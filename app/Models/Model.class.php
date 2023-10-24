@@ -3,11 +3,10 @@
 namespace app\Models;
 
 require_once '../config/config.php';
+require_once DIR_LIB_LOG. 'Log.class.php';
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use PDO;
-use app\utility\utility;
+use lib\Log\Log;
 
 /**
  * モデル基底クラス
@@ -18,9 +17,15 @@ use app\utility\utility;
 class Model
 {
     /**
-     * 
+     * @var PDO $pdo
      */
     public $pdo;
+
+    /**
+     * @var Log $log
+     */
+    public $log;
+    
 
     /**
      * コンストラクタ
@@ -33,6 +38,9 @@ class Model
      */
     public function __construct()
     {
+        // Logクラスインスタンス生成
+        $this->log = new Log();
+
         // PDOを使いDBMSに接続
         try {
             $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8;', DB_HOST, DB_NAME);
@@ -42,13 +50,7 @@ class Model
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            $this->logging($e->getMessage());
+            $this->log->logging($e->getMessage());
         }
-    }
-
-    public function logging(string $message, string $file_name = 'pdo.log'){
-        $Logger = new Logger('logger');
-        $Logger->pushHandler(new StreamHandler(__DIR__ . '/../../logs/' . $file_name, Logger::INFO));
-        $Logger->addInfo($message);
     }
 }

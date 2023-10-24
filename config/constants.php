@@ -1,4 +1,5 @@
 <?php
+
 // ==================================================
 // 定数管理ファイル
 // ==================================================
@@ -14,3 +15,9 @@ define('SYMBOL_QUESTION', '?');
 // ==================================================
 define('DIR_CONTROLLERS', 'app/Controllers');
 define('DIR_MODELS', 'app/Models');
+define('DIR_UTILS', 'app/Utils/');
+define('DIR_VIEWS', 'app/Views/');
+define('DIR_VIEWS_C', 'app/Views/Views_c/');
+define('DIR_LOGS', '../logs/');
+define('DIR_VENDOR', '../vendor/');
+define('DIR_LIB_LOG', '../lib/Log/');

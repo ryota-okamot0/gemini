@@ -27,6 +27,7 @@ final class Util {
 
     /**
      * usage <link rel="stylesheet" href="css/style.css?<?=Utility::cssUnCache()?>">
+     * @SuppressWarnings(PHPMD.StaticAccess)
      * @param  bool
      * @return string
      */
