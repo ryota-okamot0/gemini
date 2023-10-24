@@ -6,9 +6,11 @@ require_once '../config/constants.php';
 require_once DIR_VENDOR. 'smarty/smarty/libs/Smarty.class.php';
 require_once DIR_VENDOR. 'autoload.php';
 require_once '../'. DIR_UTILS. 'Util.class.php';
+require_once DIR_LIB_LOG. 'Log.class.php';
 
 use app\Utils\Util;
 use Smarty;
+use lib\Log\Log;
 
 /**
  * コントローラ基底クラス
@@ -19,6 +21,8 @@ use Smarty;
 class Controller
 {
     protected $name = "";
+
+    public $log;
 
     /**
      * コンストラクタ
@@ -31,6 +35,7 @@ class Controller
      */
     protected function __construct()
     {
+        $this->log = new Log();
     }
 
 

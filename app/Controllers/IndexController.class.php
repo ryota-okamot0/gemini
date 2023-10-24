@@ -5,10 +5,8 @@ namespace app\Controllers;
 require_once '../config/constants.php';
 require_once '../'. DIR_CONTROLLERS. SYMBOL_SLASH. 'Controller.class.php';
 require_once '../'. DIR_MODELS. SYMBOL_SLASH. 'User.class.php';
-require_once DIR_LIB_LOG. 'Log.class.php';
 
 use app\Models\User;
-use lib\Log\Log;
 
 /**
  * 初期表示クラス
@@ -66,42 +64,37 @@ class IndexController extends Controller
     public function post()
     {
         // アクション名を取得
-        $action = filter_input(INPUT_POST, 'register', FILTER_SANITIZE_STRING);
+        $add = filter_input(INPUT_POST, 'register', FILTER_SANITIZE_STRING);
+        $delete = filter_input(INPUT_POST, 'delete', FILTER_SANITIZE_STRING);
 
         // インスタンス生成
-        $log = new Log();
         $userTbl = new User();
 
         // ===========================
         // 登録処理
         // ===========================
-        if ($action === 'register') {
+        if ($add === 'register') {
             $params = array(
                 'name' => filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'age'  => filter_input(INPUT_POST, 'age', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
             );
-            $log->logging(implode("", $params));
-            $userTbl->insert($params);
+            if (!$userTbl->insert($params)) {
+                $this->log->logging('ユーザー情報の登録に失敗しました。');
+            }
         }
-        // POSTで呼ばれた
-        // if(isset($_POST['add'])){ // registerボタンを押された
-        //     $param = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        //     $this->logging($param);
-        //     $mytable = new mytable();
-        //     $mytable->insert([ // レコード挿入
-        //         'name'  => $param
-        //     ]);
-        // }
-        // if(isset($_POST['delete'])){ // deleteボタンを押された
-        //     $item = filter_input(INPUT_POST, 'item', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
-        //     $this->logging(implode(',', $item));
-        //     $mytable = new mytable();
-        //     foreach($item as $id => $val){
-        //         $mytable->delete([ // レコード削除
-        //             'id'  => $id
-        //         ]);
-        //     }
-        // }
+
+        // ===========================
+        // 削除処理
+        // ===========================
+        if ($delete === 'delete') {
+            $item = filter_input(INPUT_POST, 'item', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+            foreach ($item as $id => $val) {
+                if (!$userTbl->delete(['id'  => $id])) {
+                    $this->log->logging("ユーザー情報の登録に失敗しました。 ID：$id");
+                }
+            }
+        }
+
         // テンプレートにパラメータを渡し、HTMLを生成し返却
         return $this->view($this->name, [
             'title'     => $this->name,

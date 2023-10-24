@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-10-24 05:27:38
+/* Smarty version 4.3.0, created on 2023-10-24 07:04:02
   from '/var/www/app/Views/index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_653755ca8b57a9_36128294',
+  'unifunc' => 'content_65376c62773824_60363434',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76bc35a68687e5f955cdabd993c6c35986100b45' => 
     array (
       0 => '/var/www/app/Views/index.tpl',
-      1 => 1698125003,
+      1 => 1698130594,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:template/foot_tag.tpl' => 1,
   ),
 ),false)) {
-function content_653755ca8b57a9_36128294 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65376c62773824_60363434 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE>
 <html lang="ja">
 <head>
@@ -42,7 +42,7 @@ function content_653755ca8b57a9_36128294 (Smarty_Internal_Template $_smarty_tpl)
         </div>
         <form method="post" class="form-horizontal">
             <div class="form-group ml-5">
-                <button name="delete" type="submit" class="btn btn-danger">delete</button>
+                <button name="delete" type="submit" class="btn btn-danger" value="delete">delete</button>
             </div>
             <table class="table table-striped">
                 <tr>

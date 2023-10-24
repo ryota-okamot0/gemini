@@ -14,7 +14,7 @@
         </div>
         <form method="post" class="form-horizontal">
             <div class="form-group ml-5">
-                <button name="delete" type="submit" class="btn btn-danger">delete</button>
+                <button name="delete" type="submit" class="btn btn-danger" value="delete">delete</button>
             </div>
             <table class="table table-striped">
                 <tr>
